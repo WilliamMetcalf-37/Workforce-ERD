@@ -1,11 +1,14 @@
-import { getEmployee } from "./employeeDataProvider.js";
-import { getComputers } from "./computerDataProvider.js";
-import { EmployeeList } from "./employeeList.js";
-import { getDepartments } from "./departmentDataProvider.js";
-import { getLocations } from "./locationsDataProvider.js";
+import { getTheEmp, getTheCust } from "./SwitchView.js";
 
-getEmployee()
-.then(getComputers)
-.then(getDepartments)
-.then(getLocations)
-.then(EmployeeList)
+
+getTheEmp()
+
+const eventHub = document.querySelector(".container")
+
+eventHub.addEventListener("click", clickEvent=>{
+  if(clickEvent.target.id === "switchToCust"){
+    getTheCust()
+  }else if(clickEvent.target.id === "switchToEmp"){
+    getTheEmp()
+  }
+})

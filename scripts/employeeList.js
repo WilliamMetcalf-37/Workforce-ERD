@@ -9,27 +9,38 @@ const contentTarget = document.querySelector(".employees")
 
 
 
-
 export const EmployeeList= ()=>{
 const employees = useEmployee()
 const computers = useComputers()
 const departments = useDepartments()
 const locations = useLocations()
-const costomers = useCustomers()
+const customers = useCustomers()
 const customerRelationships = useEmployeeCustomers()
 
 
 
 const render = ()=>{
 
-  contentTarget.innerHTML = employees.map(employee =>{
+  contentTarget.innerHTML = 
+  `
+  <button id="switchToCust">Switch to Customer</button>
+  ${employees.map(employee =>{
 
     const computer = computers.find(model => model.id === employee.computerId)
     const department = departments.find(name => name.id === employee.departmentId)
     const location = locations.find(name => name.id === employee.locationId)
-    const html = Employee(employee, computer, department, location)
+
+    let relatedCustomers = customerRelationships.filter(cr=>cr.employeeId === employee.id)
+    relatedCustomers = relatedCustomers.map(ass=>{
+      return customers.find(cust=>cust.id ===ass.customerId)
+      
+    })
+
+    const html = Employee(employee, computer, department, location, relatedCustomers)
       return html
-  }).join("")
+  }).join("")}
+  `
+  
 
 
 }

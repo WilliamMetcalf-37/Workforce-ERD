@@ -1,15 +1,22 @@
-const Employee = (employee, computer, department, location) => {
+const Employee = (employee, computer, department, location,customers) => {
   return `
       <section class="employee">
           <header>
-              <h2>${employee.firstName} ${employee.lastName}</h2>
-              <p>${employee.age} Years Old</p>
-              <p>Department: ${department.name}</p>
-              <p> Works in ${location.name}</p>
+          
+              <h1>${employee.firstName} ${employee.lastName}</h1>
+              <div>${employee.age} Years Old</div>
+              <div> Works in the ${department.name} department</div>
+              <div> Currently using a ${computer.year} ${computer.model}</div>
+              <div> Works at the ${location.name} office</div>
           </header>
           <div>
-          Computer: ${computer.model} Year: ${computer.year}
-          </div>
+          <ul>
+              ${
+                  customers.map(customer => `<li>${customer.name}</li>`).join("")
+              }
+          </ul>
+      </div>
+          
           
       </section>
   `
